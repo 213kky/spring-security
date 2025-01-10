@@ -1,6 +1,7 @@
 package com.example.springsecurity.config;
 
 import com.example.springsecurity.repository.MemberRepository;
+import com.example.springsecurity.security.CustomAuthenticationEntryPoint;
 import com.example.springsecurity.security.JwtAuthenticationFilter;
 import com.example.springsecurity.security.CustomMemberDetailsService;
 import com.example.springsecurity.security.JwtAuthenticationProvider;
@@ -57,6 +58,10 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/login", "/api/signup", "/api/logout").permitAll()
                 .anyRequest().authenticated()
+            );
+        http
+            .exceptionHandling(handler -> handler
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
             );
 
         http
