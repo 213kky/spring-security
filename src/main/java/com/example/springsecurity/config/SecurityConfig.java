@@ -1,8 +1,10 @@
 package com.example.springsecurity.config;
 
+import com.example.springsecurity.repository.MemberRepository;
 import com.example.springsecurity.security.JwtAuthenticationFilter;
 import com.example.springsecurity.security.CustomMemberDetailsService;
 import com.example.springsecurity.security.JwtAuthenticationProvider;
+import com.example.springsecurity.security.JwtAuthorizationFilter;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -29,10 +31,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
 
     private final CustomMemberDetailsService customMemberDetailsService;
+    private final MemberRepository memberRepository;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager());
+        JwtAuthorizationFilter jwtAuthorizationFilter = new JwtAuthorizationFilter(memberRepository);
 
         http
             .csrf(AbstractHttpConfigurer::disable)
@@ -55,7 +59,8 @@ public class SecurityConfig {
             );
 
         http
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterAfter(jwtAuthorizationFilter, JwtAuthenticationFilter.class);
 
         return http.build();
     }
