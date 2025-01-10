@@ -5,6 +5,7 @@ import com.example.springsecurity.security.JwtAuthenticationFilter;
 import com.example.springsecurity.security.CustomMemberDetailsService;
 import com.example.springsecurity.security.JwtAuthenticationProvider;
 import com.example.springsecurity.security.JwtAuthorizationFilter;
+import com.example.springsecurity.security.JwtExceptionFilter;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -60,7 +61,8 @@ public class SecurityConfig {
 
         http
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .addFilterAfter(jwtAuthorizationFilter, JwtAuthenticationFilter.class);
+            .addFilterAfter(jwtAuthorizationFilter, JwtAuthenticationFilter.class)
+            .addFilterBefore(new JwtExceptionFilter(), JwtAuthorizationFilter.class);
 
         return http.build();
     }
