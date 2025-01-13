@@ -2,6 +2,7 @@ package com.example.springsecurity.config;
 
 import com.example.springsecurity.repository.MemberRepository;
 import com.example.springsecurity.security.CustomAuthenticationEntryPoint;
+import com.example.springsecurity.security.CustomLogoutHandler;
 import com.example.springsecurity.security.JwtAuthenticationFilter;
 import com.example.springsecurity.security.CustomMemberDetailsService;
 import com.example.springsecurity.security.JwtAuthenticationProvider;
@@ -51,6 +52,7 @@ public class SecurityConfig {
             .logout(logout -> logout
                 .logoutUrl("/api/logout")
                 .logoutSuccessUrl("/api")
+                .addLogoutHandler(new CustomLogoutHandler())
             );
 
         http
