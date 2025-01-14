@@ -24,6 +24,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -69,7 +70,7 @@ public class SecurityConfig {
         http
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .addFilterAfter(jwtAuthorizationFilter, JwtAuthenticationFilter.class)
-            .addFilterBefore(new JwtExceptionFilter(), JwtAuthorizationFilter.class);
+            .addFilterBefore(new JwtExceptionFilter(), LogoutFilter.class); // LogoutFilter 필터가 JwtAuthorizationFilter 필터보다 앞에 있는데 오류 나면 못잡아서 수정
 
         return http.build();
     }
