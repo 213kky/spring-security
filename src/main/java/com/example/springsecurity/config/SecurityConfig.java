@@ -54,6 +54,7 @@ public class SecurityConfig {
                 .logoutUrl("/api/logout")
                 .logoutSuccessUrl("/api")
                 .addLogoutHandler(new CustomLogoutHandler())
+                .deleteCookies("refresh") // 쿠키삭제 핸들러 추가 코드
             );
 
         http
