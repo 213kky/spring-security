@@ -13,6 +13,23 @@ spring:
       hibernate:
         format_sql: true
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${mail.username}
+    password: ${mail.password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          connectiontimeout: 5000
+          writetimeout: 5000
+          starttls:
+            enable: true
+            required: true
+    auth-code-expiration-millis: 1800000  # 30 * 60 * 1000 == 30분
+
 jwt:
   secret:
     access: RThxcUlkVFE3MjRuYkFMQzlWQ29PTXRUR2o2bHNtb3RiaEliRDBqc0JoNldhc1ZRcGFCRE9sdWNCWVZkS2lmSAo=
