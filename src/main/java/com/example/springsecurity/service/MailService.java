@@ -2,6 +2,7 @@ package com.example.springsecurity.service;
 
 import static com.example.springsecurity.util.RandomCodeGeneratorUtil.generateRandomNumber;
 
+import com.example.springsecurity.repository.RedisRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import java.time.Duration;

@@ -1,4 +1,4 @@
-package com.example.springsecurity.service;
+package com.example.springsecurity.repository;
 
 import java.time.Duration;
 import lombok.RequiredArgsConstructor;
