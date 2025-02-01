@@ -41,7 +41,9 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     // 2. 액세스토큰이 유효하다면 -> 인증된 객체 저장하고 doFilter 수행
 
     private static final List<RequestMatcher> excludedUrlPatterns = Arrays.asList( // 필터 적용 안할 url 지정
-        new AntPathRequestMatcher("/api/login", "POST")
+        new AntPathRequestMatcher("/api/login", "POST"),
+        new AntPathRequestMatcher("/api/mail/certification-code/send", "POST"),
+        new AntPathRequestMatcher("/api/mail/certification-code/verify", "POST")
     );
 
     @Override

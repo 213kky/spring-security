@@ -60,8 +60,10 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.GET, "/api").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/login", "/api/signup", "/api/logout").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers(HttpMethod.POST, "/api/login", "/api/signup").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/mail/certification-code/send").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/mail/certification-code/verify").permitAll()
+                .anyRequest().denyAll()
             );
         http
             .exceptionHandling(handler -> handler
