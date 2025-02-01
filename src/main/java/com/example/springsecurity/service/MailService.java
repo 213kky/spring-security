@@ -61,4 +61,8 @@ public class MailService {
         map.forEach(context::setVariable);
         return templateEngine.process("mail", context);
     }
+
+    public boolean validateEmailAuthCode(String mail, String code) {
+        return redisRepository.getValues(mail).equals(code);
+    }
 }
