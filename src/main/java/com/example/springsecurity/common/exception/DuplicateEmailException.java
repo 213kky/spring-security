@@ -1,8 +1,10 @@
 package com.example.springsecurity.common.exception;
 
-public class DuplicateEmailException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+
+public class DuplicateEmailException extends BaseException {
 
     public DuplicateEmailException(String message) {
-        super(message);
+        super(HttpStatus.CONFLICT.value(), message);
     }
 }
